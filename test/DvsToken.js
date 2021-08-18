@@ -1,6 +1,6 @@
 var DvsToken = artifacts.require("./DvsToken.sol");
 
-contract('DsvToken',function(accounts){
+contract('DvsToken',function(accounts){
 
     var tokenInstance;
 
@@ -69,9 +69,9 @@ contract('DsvToken',function(accounts){
                 assert.equal(receipt.logs[0].args._owner, accounts[0], 'logs the account the tokens are authorized from');
                 assert.equal(receipt.logs[0].args._spender, accounts[1], 'logs the account the tokens are authorized to');
                 assert.equal(receipt.logs[0].args._value, 100, 'logs the transfer amount');
-                return tokenInstance.allownace(accounts[0],accounts[1]);
-            }).then(function(allownace){
-                assert.equal(allownace,100,'stores the allownace for delegated transfer');
+                return tokenInstance.allowance(accounts[0],accounts[1]);
+            }).then(function(allowance){
+                assert.equal(allowance,100,'stores the allowance for delegated transfer');
             });
       });
       
@@ -111,9 +111,9 @@ contract('DsvToken',function(accounts){
              return tokenInstance.balanceOf(toAccount);
          }).then(function(balance){
             assert.equal(balance.toNumber(),10 , 'adds the amount from receiving amount');
-            return tokenInstance.allownace(fromAccount,spendingAccount);
-        }).then(function(allownace) {
-            assert.equal(allownace,0,'deducts the amount from the allowance')
+            return tokenInstance.allowance(fromAccount,spendingAccount);
+        }).then(function(allowance) {
+            assert.equal(allowance,0,'deducts the amount from the allowance')
         });
     });
 });

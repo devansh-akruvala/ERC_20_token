@@ -25,7 +25,7 @@ contract DvsToken{
 
     mapping(address=>uint256) public balanceOf;
     // allowance
-    mapping(address=>mapping(address=>uint256)) public allownace;
+    mapping(address=>mapping(address=>uint256)) public allowance;
 
     constructor(uint256 _initialSupply) public{
         balanceOf[msg.sender] = _initialSupply;
@@ -50,7 +50,7 @@ contract DvsToken{
     // approve
     function approve(address _spender, uint256 _value) public returns(bool success){
         //allownace
-        allownace[msg.sender][_spender] = _value;
+        allowance[msg.sender][_spender] = _value;
         // Approve event
         emit Approval(msg.sender, _spender, _value);
 
@@ -62,12 +62,12 @@ contract DvsToken{
         // requires from has enough token
         require(_value <= balanceOf[_from]);
         // reqires token is big enough
-        require(_value <= allownace[_from][msg.sender]);
+        require(_value <= allowance[_from][msg.sender]);
         // change balance
         balanceOf[_from] -= _value;
         balanceOf[_to] += _value;
         //update allowance
-        allownace[_from][msg.sender] -= _value;
+        allowance[_from][msg.sender] -= _value;
         //Transfer event
         emit Transfer(_from, _to, _value);
         //return bool
