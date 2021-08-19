@@ -30,6 +30,12 @@ module.exports = {
      port: 7545,            // Ganache port
      network_id: "*",       // Any network (default: none)
     },
+    rinkeby: {
+      host: "localhost",
+      port: 8545,
+      from: "0x25e6c81c823d4e15084f8e93f4d9b7f365c0857d",
+      network_id: "4"
+    }
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
